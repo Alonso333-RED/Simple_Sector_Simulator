@@ -9,10 +9,16 @@ public class SectorSimulator
 {
     public static void main( String[] args )
     {
+        int xSize = ThreadLocalRandom.current().nextInt(1, 10+1);
+        int ySize = ThreadLocalRandom.current().nextInt(1, 10+1);
 
-        Sector[][] world = new Sector[10][10];
+        //xSize = 10;
+        //ySize = 10;
 
+        Sector[][] world = new Sector[xSize][ySize];
         worldUtils.setupWorld(world);
+
+        System.out.println("Tamaño del mundo: "+xSize+","+ySize);
 
         int inRow = ThreadLocalRandom.current().nextInt(0, world.length);
         int inColumn = ThreadLocalRandom.current().nextInt(0, world[0].length);
@@ -20,24 +26,10 @@ public class SectorSimulator
         //inRow = 0;
         //inColumn = 0;
 
-        System.out.println("Mapa de sectores:");
-        for (Sector[] world1 : world) {
-            for (Sector world11 : world1) {
-                System.out.print(world11.getName() + "|");
-            }
-            System.out.println();
-        }
+        System.out.println("Mapa del Mundo");
         System.out.println();
-
-        System.out.println("Mapeado con conexiones");
 
         Sector mySector = world[inRow][inColumn];
-        System.out.println("Ubicación actual: " + mySector.getName() + " (" + inRow + "," + inColumn + ")");
-        System.out.println("Norte: " + mySector.getNorth().getName());
-        System.out.println("Sur: " + mySector.getSouth().getName());
-        System.out.println("Este: " + mySector.getEast().getName());
-        System.out.println("Oeste: " + mySector.getWest().getName());
-        System.out.println();
 
         for (Sector[] world1 : world) {
             for (Sector currentSector : world1) {
@@ -52,41 +44,17 @@ public class SectorSimulator
                 } else if (currentSector == mySector.getSouth()) {
                     System.out.print("v" + "  |");
                 } else {
-                    System.out.print(currentSector.getName() + "|");
+                    System.out.print(currentSector.getID() + "|");
                 }
             }
             System.out.println();
         }
-
         System.out.println();
-
-        System.out.println("Mapeado tradicional");
-
-        System.out.println("Norte: " + world[inRow - 1][inColumn].getName());
-        System.out.println("Ubicación actual: " + world[inRow][inColumn].getName() + " (" + inRow + "," + inColumn + ")");
-        System.out.println("Este: " + world[inRow][inColumn + 1].getName());
-        System.out.println("Oeste: " + world[inRow][inColumn - 1].getName());
-        System.out.println("Sur: " + world[inRow + 1][inColumn].getName());
-        System.out.println();
-
-        for (int row = 0; row < world.length; row++) {
-            for (int col = 0; col < world[row].length; col++) {
-                if (row == inRow && col == inColumn) {
-                    System.out.print("X" + "  |");
-                } else if (row == inRow - 1 && col == inColumn) {
-                    System.out.print("^" + "  |");
-                } else if (row == inRow && col == inColumn + 1) {
-                    System.out.print(">" + "  |");
-                } else if (row == inRow && col == inColumn - 1) {
-                    System.out.print("<" + "  |");
-                } else if (row == inRow + 1 && col == inColumn) {
-                    System.out.print("v" + "  |");
-                } else {
-                    System.out.print(world[row][col].getName() + "|");
-                }
-            }
-            System.out.println();
-        }
+        System.out.println("Ubicación actual: " + mySector.getName() + " (" + mySector.getXLocation()+","+mySector.getYLocation()+")");
+        System.out.println("Norte: " + mySector.getNorth().getName()+" ("+mySector.getNorth().getID()+")");
+        System.out.println("Sur: " + mySector.getSouth().getName()+" ("+mySector.getSouth().getID()+")");
+        System.out.println("Este: " + mySector.getEast().getName()+" ("+mySector.getEast().getID()+")");
+        System.out.println("Oeste: " + mySector.getWest().getName()+" ("+mySector.getWest().getID()+")");
         System.out.println();
     }
 }
