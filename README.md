@@ -1,6 +1,6 @@
 # Simple_Sector_Simulator
 
-Personal small project about a simple but easily customizable Sector Simulator. Useful for simple console games.
+Personal small project about a simple but easily gustomizable and expandible Sector Simulator. useful to use in simple console games.
 
 ## Prerequisites
 - Java 21 or newer
